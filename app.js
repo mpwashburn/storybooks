@@ -30,13 +30,11 @@ mongoose.connect(keys.mongoURI, {
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('You made to the root page');
+  res.send('It Works!');
 });
 
-// Use Routes
-app.use('/auth', auth);
 
-app.use(cookieParser);
+app.use(cookieParser());
 app.use(session({
   secret: 'secret',
   resave: false,
@@ -46,6 +44,9 @@ app.use(session({
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Use Routes
+app.use('/auth', auth);
 
 const port = process.env.PORT || 5000;
 
